@@ -19,7 +19,7 @@ const CoinGeckoClient = new CoinGecko();
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 // Variable for prefix $
-const BOT_PREFIX = "$";
+const BOT_PREFIX = "!";
 
 //The ready event is vital, it means that only _after_ this will your bot start reacting to information received from Discord
 client.on("ready", () => {});
@@ -28,6 +28,7 @@ client.on("message", async function (message) {
   if (message.content.startsWith(BOT_PREFIX)) {
     const [command, amount] = message.content.split(" ");
     const commandString = command.substring(1);
+
     if (commandString === "convert") {
       const data = await CoinGeckoClient.coins.fetch("ethereum", {});
       const price = data.data.market_data.current_price.usd;
@@ -49,7 +50,11 @@ client.on("message", async function (message) {
 USD: ${formattedUSD}`
       );
     }
+    if (commandString === "help") {
+      message.channel.send(
+        `Use !convert <number> to interact with the bot. Example: !convert 100`
+      );
   }
-});
+};
 
 client.login(process.env.DISCORD_BOT_TOKEN);
