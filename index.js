@@ -23,7 +23,7 @@ const BOT_PREFIX = "$";
 
 //The ready event is vital, it means that only _after_ this will your bot start reacting to information received from Discord
 client.on("ready", () => {
-  client.channels.cache.get("870075048126455882").send(`I'm back online`);
+  client.channels.cache.get("870075048126455882").send(`Online`);
 });
 
 client.on("message", async function (message) {
